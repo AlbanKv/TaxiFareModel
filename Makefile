@@ -53,3 +53,20 @@ pypi_test:
 
 pypi:
 	@twine upload dist/* -u $(PYPI_USERNAME)
+
+
+# ----------------------------------
+# GCP BUCKET CREATION
+# ----------------------------------
+PROJECT_ID=possible-tape-337815
+
+BUCKET_NAME=wagon-data-[789]-[CAVEY]
+
+# choose your region from https://cloud.google.com/storage/docs/locations#available_locations
+REGION=EUROPE-WEST1
+
+set_project:
+	@gcloud config set project ${PROJECT_ID}
+
+create_bucket:
+	@gsutil mb -l ${REGION} -p ${PROJECT_ID} gs://${BUCKET_NAME}
